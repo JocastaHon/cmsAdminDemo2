@@ -4450,7 +4450,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;,()=&gt;{
 
       &lt;div class=&quot;form-grid&quot;&gt;
         &lt;div class=&quot;form-group&quot;&gt;
-          &lt;label class=&quot;form-label&quot;&gt;Schedule Date &lt;span class=&quot;optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;
+          &lt;label class=&quot;form-label&quot;&gt;Schedule date and time &lt;span class=&quot;optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;
           &lt;input class=&quot;article-input&quot; id=&quot;articleScheduleDate&quot; type=&quot;datetime-local&quot;&gt;
         &lt;/div&gt;
         &lt;div class=&quot;form-group&quot;&gt;
@@ -5124,6 +5124,7 @@ document.addEventListener(&#x27;click&#x27;, function(e){
 .press-filters{display:grid;grid-template-columns:minmax(280px,1fr) 190px 190px;gap:10px;margin-bottom:14px;padding:12px;border:1px solid var(--line);border-radius:12px;background:#fff}
 .press-channel{display:inline-flex;padding:3px 8px;border-radius:5px;background:#EEF2FF;color:var(--navy);font-size:10px}
 .press-channel.ap{background:#FFF3D6;color:#B54708}.no-channel{color:var(--muted);font-size:10px;font-style:italic}
+.press-page .page:disabled{border-color:#e4e7ec;background:#fff;color:#c7cdd6;cursor:not-allowed}
 @media(max-width:800px){.press-filters{grid-template-columns:1fr}}
 &lt;/style&gt;
 
@@ -5144,7 +5145,7 @@ document.addEventListener(&#x27;click&#x27;, function(e){
 .new-press-shell{display:grid;grid-template-columns:minmax(0,1fr) 260px;border:1px solid var(--line);border-radius:12px;background:#fff;overflow:hidden}
 .new-press-main{padding:22px 24px}.new-press-side{padding:22px;border-left:1px solid var(--line)}
 .np-group{margin-bottom:18px}.np-template{padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid var(--line)}
-.np-label{display:block;margin-bottom:7px;color:var(--slate);font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.np-label{display:block;margin-bottom:7px;color:var(--slate);font-size:10px;font-weight:700;letter-spacing:0;text-transform:none}
 .np-optional{font-weight:400;text-transform:none;letter-spacing:0}
 .np-input,.np-select{width:100%;height:42px;padding:0 12px;border:1px solid var(--input);border-radius:8px;background:#fff;color:var(--text);outline:0;font-size:12px}
 .np-help{margin-top:6px;color:var(--muted);font-size:9px}
@@ -5279,7 +5280,7 @@ document.addEventListener(&#39;DOMContentLoaded&#39;,()=&gt;{
       &lt;thead&gt;&lt;tr&gt;&lt;th class=&quot;check&quot;&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;/th&gt;&lt;th class=&quot;title-col&quot;&gt;Title&lt;/th&gt;&lt;th class=&quot;category-col&quot;&gt;Channel&lt;/th&gt;&lt;th class=&quot;status-col&quot;&gt;Status&lt;/th&gt;&lt;th class=&quot;date-col&quot;&gt;Date&lt;/th&gt;&lt;th class=&quot;actions-col&quot;&gt;Actions&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
       &lt;tbody id=&quot;pressRows&quot;&gt;&lt;/tbody&gt;
     &lt;/table&gt;
-    &lt;div class=&quot;footer&quot;&gt;&lt;span id=&quot;pressSummary&quot;&gt;Showing 8 press releases&lt;/span&gt;&lt;div class=&quot;pages&quot;&gt;&lt;button class=&quot;page active&quot;&gt;1&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class=&quot;footer&quot;&gt;&lt;span id=&quot;pressSummary&quot;&gt;Showing 8 press releases&lt;/span&gt;&lt;nav class=&quot;pages&quot; aria-label=&quot;Press release pagination&quot;&gt;&lt;button class=&quot;page&quot; id=&quot;pressPrev&quot; type=&quot;button&quot; aria-label=&quot;Previous page&quot; disabled&gt;‹&lt;/button&gt;&lt;button class=&quot;page active&quot; id=&quot;pressCurrentPage&quot; type=&quot;button&quot; aria-current=&quot;page&quot;&gt;1&lt;/button&gt;&lt;button class=&quot;page&quot; id=&quot;pressNext&quot; type=&quot;button&quot; aria-label=&quot;Next page&quot; disabled&gt;›&lt;/button&gt;&lt;/nav&gt;&lt;/div&gt;
   &lt;/section&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5295,13 +5296,13 @@ document.addEventListener(&#39;DOMContentLoaded&#39;,()=&gt;{
       &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Title&lt;/label&gt;&lt;input class=&quot;np-input&quot; id=&quot;newPressTitle&quot; placeholder=&quot;Enter press release title...&quot;&gt;&lt;/div&gt;
       &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Description &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;np-editor&quot;&gt;&lt;div class=&quot;np-toolbar&quot;&gt;&lt;button class=&quot;np-tool&quot;&gt;&lt;b&gt;B&lt;/b&gt;&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;&lt;i&gt;I&lt;/i&gt;&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;&lt;u&gt;U&lt;/u&gt;&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;&lt;s&gt;S&lt;/s&gt;&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;H1&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;H2&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;H3&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;≡&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;①&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;“&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;↗&lt;/button&gt;&lt;button class=&quot;np-tool&quot;&gt;&amp;lt;/&amp;gt;&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;np-area&quot; id=&quot;newPressEditor&quot; contenteditable=&quot;true&quot;&gt;&lt;/div&gt;&lt;div class=&quot;np-count&quot; id=&quot;newPressCount&quot;&gt;Words: 0 · Characters: 0&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;np-grid&quot;&gt;
-        &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Schedule Date &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;np-input&quot; type=&quot;datetime-local&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Schedule date and time &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;input class=&quot;np-input&quot; type=&quot;datetime-local&quot;&gt;&lt;/div&gt;
         &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Timezone&lt;/label&gt;&lt;select class=&quot;np-select&quot;&gt;&lt;option&gt;UTC&lt;/option&gt;&lt;option&gt;Eastern Time (ET)&lt;/option&gt;&lt;option&gt;Central Time (CT)&lt;/option&gt;&lt;option&gt;Mountain Time (MT)&lt;/option&gt;&lt;option&gt;Pacific Time (PT)&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
       &lt;/div&gt;
-      &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Distribution Channel &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;select class=&quot;np-select&quot;&gt;&lt;option&gt;None&lt;/option&gt;&lt;option&gt;Dev Team&lt;/option&gt;&lt;option&gt;AP Newswire&lt;/option&gt;&lt;option&gt;Website&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+      &lt;div class=&quot;np-group&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Distribution channel &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;select class=&quot;np-select&quot;&gt;&lt;option&gt;None&lt;/option&gt;&lt;option&gt;Dev Team&lt;/option&gt;&lt;option&gt;AP Newswire&lt;/option&gt;&lt;option&gt;Website&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;aside class=&quot;new-press-side&quot;&gt;
-      &lt;div class=&quot;np-side-section&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Cover Image &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;np-upload&quot;&gt;▣&lt;br&gt;Upload cover image&lt;/div&gt;&lt;button class=&quot;np-side-btn&quot;&gt;▣ Pick from library&lt;/button&gt;&lt;/div&gt;
+      &lt;div class=&quot;np-side-section&quot;&gt;&lt;label class=&quot;np-label&quot;&gt;Cover image &lt;span class=&quot;np-optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;&lt;div class=&quot;np-upload&quot;&gt;▣&lt;br&gt;Upload cover image&lt;/div&gt;&lt;button class=&quot;np-side-btn&quot;&gt;▣ Pick from library&lt;/button&gt;&lt;/div&gt;
       &lt;div class=&quot;np-article-side-section&quot;&gt;
         &lt;label class=&quot;np-article-form-label&quot;&gt;Media Gallery &lt;span class=&quot;optional&quot;&gt;(optional)&lt;/span&gt;&lt;/label&gt;
         &lt;div class=&quot;media-actions&quot;&gt;&lt;button class=&quot;side-button&quot;&gt;↑ Upload&lt;/button&gt;&lt;button class=&quot;side-button&quot;&gt;▣ From library&lt;/button&gt;&lt;/div&gt;
@@ -5608,12 +5609,13 @@ document.getElementById(&#x27;pressRows&#x27;).innerHTML=rows.map(r=&gt;{
  return `&lt;tr data-status=&quot;${cls}&quot;&gt;&lt;td&gt;&lt;input type=&quot;checkbox&quot;&gt;&lt;/td&gt;&lt;td&gt;&lt;div class=&quot;article-title&quot;&gt;&lt;span class=&quot;thumb&quot;&gt;▧&lt;/span&gt;${r[0]}&lt;/div&gt;&lt;/td&gt;&lt;td&gt;${channel}&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;status ${cls}&quot;&gt;${r[2]}&lt;/span&gt;&lt;/td&gt;&lt;td&gt;${r[4]}&lt;/td&gt;&lt;td&gt;&lt;div class=&quot;actions&quot;&gt;&lt;button class=&quot;action&quot; title=&quot;View&quot;&gt;${eye}&lt;/button&gt;&lt;button class=&quot;action&quot; title=&quot;Edit&quot;&gt;${edit}&lt;/button&gt;${menu(r[2])}&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;`;
 }).join(&#x27;&#x27;);
 
-let active=&#x27;all&#x27;;
+let active=&#x27;all&#x27;,currentPage=1;
+const pageSize=10;
 function filter(){
  const q=document.getElementById(&#x27;pressSearch&#x27;).value.toLowerCase();
  const channel=document.getElementById(&#x27;pressChannel&#x27;).value;
  const date=document.getElementById(&#x27;pressDate&#x27;).value;
- let count=0;
+ const matching=[];
  document.querySelectorAll(&#x27;#pressRows tr&#x27;).forEach(row=&gt;{
    let status=row.dataset.status===&#x27;in-review&#x27;?&#x27;review&#x27;:row.dataset.status;
    const channelText=row.children[2].textContent.trim(), dateText=row.children[4].textContent.trim();
@@ -5622,14 +5624,23 @@ function filter(){
    const dateOK=date===&#x27;All Dates&#x27;||dateText.includes(date.split(&#x27; &#x27;)[0]);
    const searchOK=!q||row.textContent.toLowerCase().includes(q);
    const show=statusOK&amp;&amp;channelOK&amp;&amp;dateOK&amp;&amp;searchOK;
-   row.style.display=show?&#x27;&#x27;:&#x27;none&#x27;; if(show)count++;
+   if(show)matching.push(row);
+   row.style.display=&#x27;none&#x27;;
  });
+ const count=matching.length,totalPages=Math.max(1,Math.ceil(count/pageSize));
+ currentPage=Math.min(currentPage,totalPages);
+ matching.slice((currentPage-1)*pageSize,currentPage*pageSize).forEach(row=&gt;row.style.display=&#x27;&#x27;);
  document.getElementById(&#x27;pressSummary&#x27;).textContent=`Showing ${count} press release${count===1?&#x27;&#x27;:&#x27;s&#x27;}`;
+ document.getElementById(&#x27;pressCurrentPage&#x27;).textContent=currentPage;
+ document.getElementById(&#x27;pressPrev&#x27;).disabled=currentPage&lt;=1;
+ document.getElementById(&#x27;pressNext&#x27;).disabled=currentPage&gt;=totalPages;
 }
-document.querySelectorAll(&#x27;.press-tab&#x27;).forEach(tab=&gt;tab.addEventListener(&#x27;click&#x27;,()=&gt;{document.querySelectorAll(&#x27;.press-tab&#x27;).forEach(x=&gt;x.classList.remove(&#x27;active&#x27;));tab.classList.add(&#x27;active&#x27;);active=tab.dataset.filter;filter()}));
-document.getElementById(&#x27;pressSearch&#x27;).addEventListener(&#x27;input&#x27;,filter);
-document.getElementById(&#x27;pressChannel&#x27;).addEventListener(&#x27;change&#x27;,filter);
-document.getElementById(&#x27;pressDate&#x27;).addEventListener(&#x27;change&#x27;,filter);
+document.querySelectorAll(&#x27;.press-tab&#x27;).forEach(tab=&gt;tab.addEventListener(&#x27;click&#x27;,()=&gt;{document.querySelectorAll(&#x27;.press-tab&#x27;).forEach(x=&gt;x.classList.remove(&#x27;active&#x27;));tab.classList.add(&#x27;active&#x27;);active=tab.dataset.filter;currentPage=1;filter()}));
+document.getElementById(&#x27;pressSearch&#x27;).addEventListener(&#x27;input&#x27;,()=&gt;{currentPage=1;filter()});
+document.getElementById(&#x27;pressChannel&#x27;).addEventListener(&#x27;change&#x27;,()=&gt;{currentPage=1;filter()});
+document.getElementById(&#x27;pressDate&#x27;).addEventListener(&#x27;change&#x27;,()=&gt;{currentPage=1;filter()});
+document.getElementById(&#x27;pressPrev&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{if(currentPage&gt;1){currentPage--;filter()}});
+document.getElementById(&#x27;pressNext&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{if(!document.getElementById(&#x27;pressNext&#x27;).disabled){currentPage++;filter()}});
 document.addEventListener(&#x27;click&#x27;,e=&gt;{const more=e.target.closest(&#x27;.more-action&#x27;);if(more){e.stopPropagation();const wrap=more.closest(&#x27;.more-wrap&#x27;);document.querySelectorAll(&#x27;.more-wrap.open&#x27;).forEach(x=&gt;{if(x!==wrap)x.classList.remove(&#x27;open&#x27;)});wrap.classList.toggle(&#x27;open&#x27;)}else if(!e.target.closest(&#x27;.more-menu&#x27;))document.querySelectorAll(&#x27;.more-wrap.open&#x27;).forEach(x=&gt;x.classList.remove(&#x27;open&#x27;))});
 filter();
 })();
@@ -7185,7 +7196,8 @@ function openContentQuickView(data){contentSelection=data;const modal=document.g
 function openLibraryEditor(kind,data){const frame=document.getElementById(kind==='press'?'frame-press':'frame-articles'),doc=frame?.contentDocument;if(!doc)return;showPage(kind==='press'?'press':'articles');if(kind==='press'){doc.getElementById('newPressReleaseButton')?.click();setTimeout(()=>{const head=doc.querySelector('.new-press-head h1'),sub=doc.querySelector('.new-press-head p'),title=doc.getElementById('newPressTitle'),editor=doc.getElementById('newPressEditor'),selects=[...doc.querySelectorAll('.new-press-main .np-select')],date=doc.querySelector('.new-press-main input[type="datetime-local"]'),save=doc.getElementById('createNewPress');if(head)head.textContent='Edit Press Release';if(sub)sub.textContent='Update the press release and publishing details.';if(title){title.value=data.title;title.dispatchEvent(new Event('input',{bubbles:true}))}if(editor){editor.innerHTML='<h2>Company Announcement</h2><p>Zena today announced a new milestone in its digital publishing program, expanding the tools available to content teams.</p><p>The update improves collaboration, scheduled distribution, and performance reporting across connected channels.</p>';editor.dispatchEvent(new Event('input',{bubbles:true}))}if(selects[0])selects[0].value='Company Announcement';if(selects[1])selects[1].value='Eastern Time (ET)';if(selects[2])selects[2].value=data.category==='AP Newswire'?'AP Newswire':'Dev Team';if(date)date.value='2026-09-02T09:30';if(save){save.disabled=false;save.innerHTML='<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" style="vertical-align:middle;margin-right:7px"><path d="M5 3h12l2 2v16H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>Save Changes'}},0)}else{doc.getElementById('newArticleButton')?.click();setTimeout(()=>{const head=doc.querySelector('.create-page-head h1'),sub=doc.querySelector('.create-page-head p'),title=doc.getElementById('articleTitleInput'),editor=doc.getElementById('articleEditor'),selects=[...doc.querySelectorAll('.article-form-main .article-select')],date=doc.getElementById('articleScheduleDate'),save=doc.getElementById('createDraftButton');if(head)head.textContent='Edit Article';if(sub)sub.textContent='Update the article and publishing details.';if(title){title.value=data.title;title.dispatchEvent(new Event('input',{bubbles:true}))}if(editor){editor.innerHTML='<h2>Executive Summary</h2><p>This article explores how modern content teams can plan, review, and publish high-quality stories across multiple channels.</p><p>With a shared workflow, teams reduce handoffs, maintain brand consistency, and bring campaigns to market faster.</p>';editor.dispatchEvent(new Event('input',{bubbles:true}))}if(selects[0])selects[0].value=['General','News','Insights'].includes(data.category)?data.category:'News';if(selects[1])selects[1].value='Website';if(date)date.value='2026-09-01T10:00';if(save){save.disabled=false;save.innerHTML='<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" style="vertical-align:middle;margin-right:7px"><path d="M5 3h12l2 2v16H5z"/><path d="M8 3v6h8V3M8 21v-7h8v7"/></svg>Save Changes'}},0)}}
 function bindContentWorkspace(frameId,kind){const frame=document.getElementById(frameId);if(!frame)return;const bind=()=>{const doc=frame.contentDocument;if(!doc||!doc.documentElement||doc.documentElement.dataset.workspaceBound)return;doc.documentElement.dataset.workspaceBound='true';doc.addEventListener('click',event=>{const button=event.target.closest('button[title="View"],button[title="Edit"]');if(!button)return;const row=button.closest('tr');if(!row)return;const cells=[...row.cells];contentSelection={kind,title:(cells[1]?.innerText||'Untitled').trim().replace(/^[▤▧]\s*/,''),category:(cells[2]?.innerText||'General').trim(),status:(cells[3]?.innerText||'Draft').trim(),date:(cells[kind==='press'?4:6]?.innerText||'Aug 28, 2026').trim()};const mode=button.title.toLowerCase();if(mode==='edit'){openLibraryEditor(kind,contentSelection);return}openContentQuickView(contentSelection)})};frame.addEventListener('load',bind);bind()}bindContentWorkspace('frame-articles','article');bindContentWorkspace('frame-press','press');
 document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>Edit';document.querySelectorAll('.shell-link[data-route]').forEach(a=>a.onclick=()=>showPage(a.dataset.route));document.querySelectorAll('.shell-tab').forEach(t=>t.onclick=()=>{const g=t.closest('.shell-group'),open=!g.classList.contains('open');document.querySelectorAll('.shell-group').forEach(x=>x.classList.remove('open'));if(open)g.classList.add('open')});showPage(location.hash.slice(1)||'dashboard');
-</script><div class="delete-confirm-backdrop" id="globalDeleteConfirm" aria-hidden="true"><section class="delete-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="globalDeleteTitle"><header class="delete-confirm-head"><span class="delete-confirm-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 10v6M14 10v6"/></svg></span><div class="delete-confirm-copy"><h2 id="globalDeleteTitle">Delete item?</h2><p id="globalDeleteMessage">Are you sure you want to delete this item? This action cannot be undone.</p></div><button class="delete-confirm-x" type="button" data-delete-cancel aria-label="Close">×</button></header><footer class="delete-confirm-footer"><button class="delete-confirm-btn" type="button" data-delete-cancel>Cancel</button><button class="delete-confirm-btn danger" type="button" id="globalDeleteAction">Delete</button></footer></section></div><script id="global-delete-confirm-script-v1">(()=>{const modal=document.getElementById('globalDeleteConfirm');if(!modal)return;let pending=null;const candidate=target=>{const button=target.closest&&target.closest('button,a');if(!button||button.closest('#globalDeleteConfirm'))return null;const clue=((button.getAttribute('aria-label')||'')+' '+(button.getAttribute('title')||'')+' '+(button.textContent||'')+' '+(typeof button.className==='string'?button.className:'')).toLowerCase();return /(^|[\s_-])(delete|remove)([\s_-]|$)/.test(clue)?button:null};const objectName=button=>{const raw=(button.getAttribute('aria-label')||button.getAttribute('title')||button.textContent||'item').trim();if(/user|member/i.test(raw))return'user';if(/blog|article/i.test(raw))return'article';const cleaned=raw.replace(/^(delete|remove)\s*/i,'').trim();return cleaned&&cleaned.length<36?cleaned.toLowerCase():'item'};const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');pending=null};document.addEventListener('click',event=>{const button=candidate(event.target);if(!button||button.dataset.deleteConfirmed==='true')return;event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();pending=button;const noun=objectName(button),display=noun.charAt(0).toUpperCase()+noun.slice(1);document.getElementById('globalDeleteTitle').textContent='Delete '+noun+'?';document.getElementById('globalDeleteMessage').textContent='Are you sure you want to delete '+display+'? This action cannot be undone.';document.getElementById('globalDeleteAction').textContent='Delete '+display;modal.classList.add('open');modal.setAttribute('aria-hidden','false')},true);modal.querySelectorAll('[data-delete-cancel]').forEach(button=>button.addEventListener('click',close));modal.addEventListener('click',event=>{if(event.target===modal)close()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&modal.classList.contains('open'))close()});document.getElementById('globalDeleteAction').addEventListener('click',()=>{const button=pending;if(!button)return;close();button.dataset.deleteConfirmed='true';button.click();setTimeout(()=>delete button.dataset.deleteConfirmed,0)})})();</script><script>
+</script><div class="delete-confirm-backdrop" id="globalDeleteConfirm" aria-hidden="true"><section class="delete-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="globalDeleteTitle"><header class="delete-confirm-head"><span class="delete-confirm-icon"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 10v6M14 10v6"/></svg></span><div class="delete-confirm-copy"><h2 id="globalDeleteTitle">Delete item?</h2><p id="globalDeleteMessage">Are you sure you want to delete this item? This action cannot be undone.</p></div><button class="delete-confirm-x" type="button" data-delete-cancel aria-label="Close">×</button></header><footer class="delete-confirm-footer"><button class="delete-confirm-btn" type="button" data-delete-cancel>Cancel</button><button class="delete-confirm-btn danger" type="button" id="globalDeleteAction">Delete</button></footer></section></div><script id="global-delete-confirm-script-v1">(()=>{const modal=document.getElementById('globalDeleteConfirm');if(!modal)return;let pending=null;const candidate=target=>{const button=target.closest&&target.closest('button,a');if(!button||button.closest('#globalDeleteConfirm'))return null;const clue=((button.getAttribute('aria-label')||'')+' '+(button.getAttribute('title')||'')+' '+(button.textContent||'')+' '+(typeof button.className==='string'?button.className:'')).toLowerCase();return /(^|[\s_-])(delete|remove)([\s_-]|$)/.test(clue)?button:null};const objectName=button=>{const raw=(button.getAttribute('aria-label')||button.getAttribute('title')||button.textContent||'item').trim();if(/user|member/i.test(raw))return'user';if(/blog|article/i.test(raw))return'article';const cleaned=raw.replace(/^(delete|remove)\s*/i,'').trim();return cleaned&&cleaned.length<36?cleaned.toLowerCase():'item'};const close=()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');pending=null};document.addEventListener('click',event=>{const button=candidate(event.target);if(!button||button.dataset.deleteConfirmed==='true')return;event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();pending=button;const noun=objectName(button),display=noun.charAt(0).toUpperCase()+noun.slice(1);document.getElementById('globalDeleteTitle').textContent='Delete '+noun+'?';document.getElementById('globalDeleteMessage').textContent='Are you sure you want to delete '+display+'? This action cannot be undone.';document.getElementById('globalDeleteAction').textContent='Delete '+display;modal.classList.add('open');modal.setAttribute('aria-hidden','false')},true);modal.querySelectorAll('[data-delete-cancel]').forEach(button=>button.addEventListener('click',close));modal.addEventListener('click',event=>{if(event.target===modal)close()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&modal.classList.contains('open'))close()});document.getElementById('globalDeleteAction').addEventListener('click',()=>{const button=pending;if(!button)return;close();button.dataset.deleteConfirmed='true';button.click();setTimeout(()=>delete button.dataset.deleteConfirmed,0)})})();</script>
+<script>
 (function () {
   const scheduleStyles = `
     .draft-list-heading{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:end!important;gap:10px!important}
@@ -7228,6 +7240,13 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
     .schedule-edit{display:inline-flex!important;align-items:center;justify-content:center;gap:7px;border-color:#1e3b8a!important;background:#fff!important;color:#1e3b8a!important}
     .schedule-edit:hover,.schedule-edit:focus{background:#eef2ff!important;color:#1e3b8a!important}
     .schedule-edit svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .content-review-backdrop{position:fixed;z-index:29000;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(16,24,40,.45)}
+    .content-review-modal{width:min(1080px,100%);max-height:92vh;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;border-radius:16px;background:#fff;box-shadow:0 24px 70px rgba(16,24,40,.28)}
+    .content-review-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:22px 26px;border-bottom:1px solid #e4e7ec}.content-review-head h2{margin:0;color:#101828;font-size:21px!important}.content-review-head p{margin:6px 0 0;color:#667085;font-size:12px!important}.content-review-close{width:32px;height:32px;border:0;border-radius:7px;background:transparent;color:#667085;font-size:24px;cursor:pointer}.content-review-close:hover{background:#f2f4f7}
+    .content-review-body{min-height:0;display:grid;grid-template-columns:210px minmax(0,1fr);overflow:hidden}.content-review-side{padding:22px 16px;border-right:1px solid #e4e7ec;background:#f8fafc}.content-review-side-label{margin:0 8px 12px;color:#667085;font-size:9px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}.content-review-destination{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid #d0d5dd;border-radius:10px;background:#fff}.content-review-destination-icon{width:34px;height:34px;display:grid;place-items:center;flex:none;border-radius:8px;background:#1e3b8a;color:#fff;font-size:10px;font-weight:800}.content-review-destination strong,.content-review-destination small{display:block}.content-review-destination strong{color:#101828;font-size:11px}.content-review-destination small{margin-top:3px;color:#667085;font-size:9px}
+    .content-review-main{min-width:0;overflow:auto;padding:24px 28px}.content-review-kicker{margin-bottom:5px;color:#667085;font-size:9px;font-weight:700;text-transform:uppercase}.content-review-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}.content-review-title-row h3{margin:0;color:#101828;font-size:19px!important}.content-review-chip{padding:6px 10px;border-radius:999px;background:#eef2ff;color:#1e3b8a;font-size:9px;font-weight:700}.content-review-preview{overflow:hidden;border:1px solid #e4e7ec;border-radius:11px;background:#f2f4f7}.content-review-document{min-height:230px;padding:30px 34px;background:#fff}.content-review-brand{display:block!important;width:auto!important;height:auto!important;margin:0 0 20px!important;padding:0!important;background:transparent!important;color:#1e3b8a!important;font-size:9px!important;font-weight:800!important;letter-spacing:.08em}.content-review-document h4{margin:0 0 13px;color:#101828;font-size:20px!important}.content-review-document p{margin:0;color:#475467;font-size:11px!important;line-height:1.65!important;white-space:pre-wrap}.content-review-video{height:255px;display:grid;place-items:center;background:linear-gradient(135deg,#102a5c,#52627a);color:#fff}.content-review-play{width:58px;height:58px;display:grid;place-items:center;border-radius:50%;background:#fff;color:#1e3b8a;font-size:20px}.content-review-copy{padding:13px 15px;border-top:1px solid #e4e7ec;background:#fff;color:#475467;font-size:11px;line-height:1.5}
+    .content-review-schedule-summary{margin-top:16px;padding-top:14px;border-top:1px solid #e4e7ec}.content-review-schedule-summary h4{margin:0 0 11px;color:#101828;font-size:12px!important}.content-review-schedule-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}.content-review-schedule-item{display:inline-flex;align-items:center;gap:7px;color:#344054;font-size:11px}.content-review-schedule-item svg{width:18px;height:18px;fill:none;stroke:#52627a;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .content-review-footer{display:flex;align-items:center;gap:10px;padding:14px 26px;border-top:1px solid #e4e7ec}.content-review-count{margin-right:auto;color:#667085;font-size:10px}.content-review-btn{height:42px;padding:0 17px;border:1px solid #d0d5dd;border-radius:8px;background:#fff;color:#344054;font-weight:700;cursor:pointer}.content-review-btn.primary{display:inline-flex;align-items:center;gap:7px;border-color:#1e3b8a;background:#1e3b8a;color:#fff}.content-review-btn.primary svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}@media(max-width:700px){.content-review-body{grid-template-columns:1fr}.content-review-side{border-right:0;border-bottom:1px solid #e4e7ec}.content-review-modal{max-height:95vh}}
     .schedule-confirm-backdrop{position:fixed;z-index:20000;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(16,24,40,.42)}
     .schedule-confirm-modal{position:relative;width:min(430px,100%);overflow:hidden;border-radius:16px;background:#fff;box-shadow:0 24px 70px rgba(16,24,40,.28);text-align:center}
     .schedule-confirm-close{position:absolute;top:14px;right:14px;width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:8px;background:transparent;color:#667085;font-size:24px;line-height:1;cursor:pointer}
@@ -7531,7 +7550,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
       const isDirty = () => frame.dataset.unsavedChanges === 'true';
       let bypassExit = false;
 
-      const closeFeedback = () => doc.querySelector('.cms-feedback-backdrop')?.remove();
+      const closeFeedback = () => doc.querySelectorAll('.cms-feedback-backdrop,.schedule-confirm-backdrop').forEach(overlay => overlay.remove());
       const showFeedback = ({title,message,kind='success',buttons}) => {
         closeFeedback();
         const overlay = doc.createElement('div');
@@ -7676,8 +7695,19 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         table .actions>.cms-more-wrap>.cms-more-button{width:32px!important;height:32px!important;min-width:32px!important;min-height:32px!important;display:grid!important;place-items:center!important;flex:0 0 32px!important;margin:0!important;padding:0!important;border-radius:6px!important}
         table .actions svg{width:16px!important;height:16px!important}
         table .actions>.more-wrap,table .actions>.more,table .actions>.cms-more-wrap{width:32px!important;height:32px!important;flex:0 0 32px!important;margin:0!important}
+        .cms-edit-save-outline:not(:disabled){border-color:#1e3b8a!important;background:#fff!important;color:#1e3b8a!important;box-shadow:none!important}.cms-edit-save-outline:not(:disabled):hover,.cms-edit-save-outline:not(:disabled):focus{border-color:#1e3b8a!important;background:#eef2ff!important;color:#1e3b8a!important}
       `;
       doc.head.appendChild(style);
+      const syncEditSaveButtons = () => {
+        doc.querySelectorAll('button').forEach(button => {
+          const excluded = button.closest('.cms-feedback-backdrop,.published-flow-backdrop,.published-confirm-backdrop,.content-review-backdrop,.cms-status-backdrop');
+          const isEditSave = !excluded && button.textContent.trim() === 'Save Changes';
+          button.classList.toggle('cms-edit-save-outline', isEditSave);
+          if (isEditSave) button.classList.remove('primary');
+        });
+      };
+      new MutationObserver(syncEditSaveButtons).observe(doc.body,{subtree:true,childList:true,characterData:true});
+      syncEditSaveButtons();
     };
     frame.addEventListener('load',bind);bind();
   }
@@ -7756,13 +7786,13 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
   }
 
   function showScheduledConfirmation(doc, title, dateTime) {
-    doc.querySelector('.schedule-confirm-backdrop')?.remove();
+    doc.querySelectorAll('.cms-feedback-backdrop,.schedule-confirm-backdrop,.published-confirm-backdrop').forEach(overlay => overlay.remove());
     const overlay = doc.createElement('div');
-    overlay.className = 'schedule-confirm-backdrop';
-    overlay.innerHTML = '<section class="schedule-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="scheduleConfirmTitle"><button class="schedule-confirm-close" type="button" aria-label="Close">×</button><div class="schedule-confirm-body"><div class="schedule-confirm-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"></path></svg></div><h2 id="scheduleConfirmTitle">Post Scheduled Successfully</h2><p><strong>' + escapeHtml(title || 'Your post') + '</strong> has been scheduled successfully' + (dateTime ? ' for <strong>' + escapeHtml(dateTime) + '</strong>.' : '.') + '</p></div><footer class="schedule-confirm-footer"><button class="schedule-confirm-done" type="button">Close</button></footer></section>';
+    overlay.className = 'cms-feedback-backdrop';
+    overlay.innerHTML = '<section class="cms-feedback-modal" role="dialog" aria-modal="true" aria-labelledby="scheduleConfirmTitle"><header class="cms-feedback-head"><span class="cms-feedback-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m7.5 12 3 3 6-7"></path></svg></span><div class="cms-feedback-copy"><h2 id="scheduleConfirmTitle">Post Scheduled Successfully</h2><p><strong>' + escapeHtml(title || 'Your post') + '</strong> has been scheduled successfully' + (dateTime ? ' for <strong>' + escapeHtml(dateTime) + '</strong>.' : '.') + '</p></div><button class="cms-feedback-x" type="button" aria-label="Close">×</button></header><footer class="cms-feedback-footer"><button class="cms-feedback-btn primary schedule-confirm-done" type="button">Close</button></footer></section>';
     doc.body.appendChild(overlay);
     const close = () => overlay.remove();
-    overlay.querySelectorAll('.schedule-confirm-close,.schedule-confirm-done').forEach(button => button.addEventListener('click', close));
+    overlay.querySelectorAll('.cms-feedback-x,.schedule-confirm-done').forEach(button => button.addEventListener('click', close));
     overlay.addEventListener('click', event => {
       if (event.target === overlay) close();
     });
@@ -7772,6 +7802,32 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
       close();
     });
     overlay.querySelector('.schedule-confirm-done').focus();
+  }
+
+  function showContentScheduleReview(doc, options) {
+    installStyles(doc);
+    doc.querySelectorAll('.content-review-backdrop,.cms-feedback-backdrop').forEach(overlay => overlay.remove());
+    const value = new Date(options.scheduleValue || '');
+    const validDate = !Number.isNaN(value.getTime());
+    const dateLabel = validDate ? value.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}) : 'Not selected';
+    const timeLabel = validDate ? value.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) : 'Not selected';
+    const type = options.type || 'Content';
+    const title = options.title || 'Untitled content';
+    const destination = options.destination || 'Website';
+    const content = (options.content || '').trim() || 'No description added.';
+    const destinationMark = destination.split(/\s+/).map(part => part[0]).join('').slice(0,2).toUpperCase();
+    const preview = options.video
+      ? '<div class="content-review-video"><span class="content-review-play">▶</span></div><div class="content-review-copy">' + escapeHtml(content) + '</div>'
+      : '<article class="content-review-document"><div class="content-review-brand">ZENA CMS · ' + escapeHtml(type.toUpperCase()) + '</div><h4>' + escapeHtml(title) + '</h4><p>' + escapeHtml(content) + '</p></article>';
+    const overlay = doc.createElement('div');
+    overlay.className = 'content-review-backdrop';
+    overlay.innerHTML = '<section class="content-review-modal" role="dialog" aria-modal="true" aria-labelledby="contentReviewTitle"><header class="content-review-head"><div><h2 id="contentReviewTitle">Schedule ' + escapeHtml(type) + '</h2><p>Review the final content and schedule before publishing.</p></div><button class="content-review-close" type="button" aria-label="Close">×</button></header><div class="content-review-body"><aside class="content-review-side"><div class="content-review-side-label">Publishing destination</div><div class="content-review-destination"><span class="content-review-destination-icon">' + escapeHtml(destinationMark) + '</span><span><strong>' + escapeHtml(destination) + '</strong><small>' + escapeHtml(type) + '</small></span></div></aside><main class="content-review-main"><div class="content-review-kicker">Reviewing</div><div class="content-review-title-row"><h3>' + escapeHtml(title) + '</h3><span class="content-review-chip">' + escapeHtml(type) + '</span></div><div class="content-review-preview">' + preview + '</div><section class="content-review-schedule-summary"><h4>Schedule</h4><div class="content-review-schedule-row"><span class="content-review-schedule-item"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M7 3v4M17 3v4M3 10h18"></path></svg><strong>' + escapeHtml(dateLabel) + '</strong></span><span class="content-review-schedule-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg><strong>' + escapeHtml(timeLabel) + '</strong></span><span class="content-review-schedule-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"></path></svg><strong>' + escapeHtml(options.timezone || 'Eastern Time (ET)') + '</strong></span></div></section></main></div><footer class="content-review-footer"><span class="content-review-count">' + escapeHtml(String(options.destinationCount || 1)) + ' destination' + ((options.destinationCount || 1) === 1 ? '' : 's') + ' selected</span><button class="content-review-btn content-review-cancel" type="button">Cancel</button><button class="content-review-btn primary content-review-confirm" type="button">' + scheduleIcon + 'Schedule</button></footer></section>';
+    doc.body.appendChild(overlay);
+    const close = () => overlay.remove();
+    overlay.querySelectorAll('.content-review-close,.content-review-cancel').forEach(button => button.addEventListener('click', close));
+    overlay.querySelector('.content-review-confirm').addEventListener('click', () => { close(); options.onConfirm?.(); });
+    overlay.addEventListener('click', event => { if (event.target === overlay) close(); });
+    overlay.querySelector('.content-review-confirm').focus();
   }
 
   function showPublishedSaveConfirmation(doc, onConfirm) {
@@ -7795,15 +7851,15 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
   }
 
   function showPublishedSaveSuccess(doc) {
-    doc.querySelector('.published-confirm-backdrop')?.remove();
+    doc.querySelectorAll('.cms-feedback-backdrop,.schedule-confirm-backdrop,.published-confirm-backdrop').forEach(overlay => overlay.remove());
     const overlay = doc.createElement('div');
-    overlay.className = 'published-confirm-backdrop';
-    overlay.innerHTML = '<section class="published-confirm-modal" role="dialog" aria-modal="true" aria-labelledby="publishedSaveSuccessTitle"><header class="published-confirm-head"><div class="published-confirm-icon success" style="background:#d1fadf;color:#17a900" aria-hidden="true">✓</div><div class="published-confirm-copy"><h2 id="publishedSaveSuccessTitle">Changes Saved Successfully</h2><p>The supported fields were updated on the connected platforms.</p></div><button class="published-confirm-close" type="button" aria-label="Close">×</button></header><footer class="published-confirm-actions"><button class="confirm" type="button">Close</button></footer></section>';
+    overlay.className = 'cms-feedback-backdrop';
+    overlay.innerHTML = '<section class="cms-feedback-modal" role="dialog" aria-modal="true" aria-labelledby="publishedSaveSuccessTitle"><header class="cms-feedback-head"><span class="cms-feedback-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="m7.5 12 3 3 6-7"></path></svg></span><div class="cms-feedback-copy"><h2 id="publishedSaveSuccessTitle">Changes Saved Successfully</h2><p>The supported fields were updated on the connected platforms.</p></div><button class="cms-feedback-x" type="button" aria-label="Close">×</button></header><footer class="cms-feedback-footer"><button class="cms-feedback-btn primary published-success-done" type="button">Close</button></footer></section>';
     doc.body.appendChild(overlay);
     const close = () => overlay.remove();
-    overlay.querySelectorAll('.published-confirm-close,.confirm').forEach(button => button.addEventListener('click', close));
+    overlay.querySelectorAll('.cms-feedback-x,.published-success-done').forEach(button => button.addEventListener('click', close));
     overlay.addEventListener('click', event => { if (event.target === overlay) close(); });
-    overlay.querySelector('.confirm')?.focus();
+    overlay.querySelector('.published-success-done')?.focus();
   }
 
   function addScheduledPost(doc, post) {
@@ -7872,7 +7928,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
     const videoSource = isVideo ? '<section class="published-editor-panel"><header class="published-editor-panel-head"><h2>Published media</h2><p>The live video is shown for reference and cannot be replaced through this integration.</p></header><div class="published-editor-panel-body">' + inlineVideoMarkup(134) + '<div class="published-video-file"><span class="published-video-file-icon">MP4</span><span class="published-video-file-copy"><strong data-published-video-name>' + escapeHtml(videoFilename) + '</strong><span>Video file · 84 MB · Added ' + escapeHtml(data.publishedOn) + '</span></span><span class="published-video-file-actions"><button class="published-video-replace" type="button" disabled>Replace Video</button><input class="published-video-replace-input" data-published-video-file type="file" accept="video/mp4,video/quicktime,video/webm" disabled></span></div><div class="published-lock-note">Published media is read-only because the connected platform integrations do not support media replacement after publishing.</div></div></section>' : '';
     const videoSection = isVideo ? '<div class="published-side-section"><div class="published-edit-field"><label>Published Channels</label><div class="published-channel-list">' + data.channels.map(channel => '<label class="published-channel-option"><input type="checkbox" checked disabled><span class="published-channel-mark">' + escapeHtml(channelMarks[channel] || channel.slice(0, 2)) + '</span><span>' + escapeHtml(channel) + '</span></label>').join('') + '</div><div class="published-lock-note">Published channels are locked. Delete the post from a channel before publishing it elsewhere.</div></div></div>' : '';
     const sidebarSection = isLongForm ? coverSection : videoSection;
-    const pageHeader = '<button class="published-edit-back" type="button">← Back to Published</button><div class="published-edit-page-head"><div><h1>Edit ' + escapeHtml(typeName) + '</h1><p>Update the ' + (isLongForm ? typeName.toLowerCase() + ' and publishing details.' : 'published ' + (typeName === 'Video' ? 'video and publishing details.' : 'post content and details.')) + '</p></div><div class="published-edit-head-actions"><button class="published-action published-edit-cancel" type="button">Cancel</button><button class="published-action primary published-edit-save" type="button" disabled>▣&nbsp; Save Changes</button></div></div>';
+    const pageHeader = '<button class="published-edit-back" type="button">← Back to Published</button><div class="published-edit-page-head"><div><h1>Edit ' + escapeHtml(typeName) + '</h1><p>Update the ' + (isLongForm ? typeName.toLowerCase() + ' and publishing details.' : 'published ' + (typeName === 'Video' ? 'video and publishing details.' : 'post content and details.')) + '</p></div><div class="published-edit-head-actions"><button class="published-action published-edit-cancel" type="button">Cancel</button><button class="published-action published-edit-save" type="button" disabled>▣&nbsp; Save Changes</button></div></div>';
     if (isVideo) {
       const platformNames = ['YouTube', 'Vimeo', 'LinkedIn'];
       const platforms = platformNames.map(channel => '<label class="published-channel-option published-platform-option"><input type="checkbox" ' + (data.channels.includes(channel) ? 'checked ' : '') + 'disabled><span class="published-channel-mark">' + escapeHtml(channelMarks[channel]) + '</span><span class="published-platform-copy"><strong>' + escapeHtml(channel) + '</strong><small>Connected · ' + (channel === 'YouTube' ? 'Zena Channel' : channel === 'Vimeo' ? 'Zena Media' : 'Zena Company') + '</small></span></label>').join('');
@@ -8040,7 +8096,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
     page.className = 'content scheduler-published-edit-page';
     const toolbar = '<div class="published-editor-toolbar"><button class="published-editor-tool" type="button"><b>B</b></button><button class="published-editor-tool" type="button"><i>I</i></button><button class="published-editor-tool" type="button"><u>U</u></button><button class="published-editor-tool" type="button"><s>S</s></button><span class="published-editor-divider"></span><button class="published-editor-tool" type="button">H1</button><button class="published-editor-tool" type="button">H2</button><button class="published-editor-tool" type="button">H3</button><span class="published-editor-divider"></span><button class="published-editor-tool" type="button">≡</button><button class="published-editor-tool" type="button">①</button><button class="published-editor-tool" type="button">“</button><button class="published-editor-tool" type="button">↗</button><button class="published-editor-tool" type="button">▦</button><button class="published-editor-tool" type="button">&lt;/&gt;</button></div>';
     const scheduleValue = dateTimeValue(scheduledDate + ' ' + scheduledTime);
-    page.innerHTML = '<button class="published-edit-back" type="button">← Back to Scheduler</button><header class="published-edit-page-head"><div><h1>Edit Social Post</h1><p>Update the post, media, and publishing details.</p></div><div class="published-edit-head-actions"><button class="published-action published-edit-cancel" type="button">Cancel</button><button class="published-action primary published-edit-save" type="button">' + saveIcon + 'Save Changes</button></div></header><section class="scheduler-published-edit-shell"><div class="published-edit-form"><div class="published-edit-field published-template-group"><label>Template <span class="published-optional">(optional)</span></label><select><option>None — Start from scratch</option><option selected>Standard Social Post</option><option>Campaign Announcement</option></select><div class="published-template-help">Choose a starting layout or continue editing the current post.</div></div><div class="published-edit-field"><label>Title</label><input data-published-title value="' + escapeHtml(data.title) + '"></div><div class="published-edit-field"><label>Post content</label><div class="published-rich-editor">' + toolbar + '<div class="published-editor-area" data-published-body contenteditable="true">' + escapeHtml(data.body) + '</div><div class="published-editor-count" data-editor-count></div></div></div><div class="published-edit-grid"><div class="published-edit-field"><label>Schedule date and time</label><input data-scheduled-date type="datetime-local" value="' + escapeHtml(scheduleValue) + '"></div><div class="published-edit-field"><label>Status</label><select data-scheduled-status><option selected>Scheduled</option><option>Draft</option></select></div></div><div class="published-edit-field"><label>Distribution channel</label><select><option' + (data.channel === 'LinkedIn' ? ' selected' : '') + '>LinkedIn</option><option' + (data.channel === 'Twitter' ? ' selected' : '') + '>Twitter</option><option' + (data.channel === 'Website' ? ' selected' : '') + '>Website</option></select></div></div><aside class="published-edit-sidebar"><div class="published-side-section"><label class="form-label">Cover Image <span class="published-optional">(optional)</span></label><label class="published-cover-upload"><input type="file" accept="image/*" data-social-cover><span><strong>▣</strong>Upload cover image</span></label><div class="published-cover-current" data-social-cover-name>' + escapeHtml(item.dataset.coverImageName || 'No cover image selected') + '</div><button class="published-side-button" type="button" data-social-cover-library>▣ Pick from library</button></div><div class="published-side-section"><label class="form-label">Media Gallery <span class="published-optional">(optional)</span></label><input type="file" accept="image/*,video/*" multiple hidden data-social-media-input><div class="published-media-actions"><button class="published-side-button" type="button" data-social-media-upload>↑ Upload</button><button class="published-side-button" type="button" data-social-media-library>▣ From library</button></div><div class="published-cover-current" data-social-media-name>' + escapeHtml(item.dataset.mediaNames || 'No additional media selected') + '</div></div></aside></section>';
+    page.innerHTML = '<button class="published-edit-back" type="button">← Back to Scheduler</button><header class="published-edit-page-head"><div><h1>Edit Social Post</h1><p>Update the post, media, and publishing details.</p></div><div class="published-edit-head-actions"><button class="published-action published-edit-cancel" type="button">Cancel</button><button class="published-action published-edit-save" type="button">' + saveIcon + 'Save Changes</button></div></header><section class="scheduler-published-edit-shell"><div class="published-edit-form"><div class="published-edit-field published-template-group"><label>Template <span class="published-optional">(optional)</span></label><select><option>None — Start from scratch</option><option selected>Standard Social Post</option><option>Campaign Announcement</option></select><div class="published-template-help">Choose a starting layout or continue editing the current post.</div></div><div class="published-edit-field"><label>Title</label><input data-published-title value="' + escapeHtml(data.title) + '"></div><div class="published-edit-field"><label>Post content</label><div class="published-rich-editor">' + toolbar + '<div class="published-editor-area" data-published-body contenteditable="true">' + escapeHtml(data.body) + '</div><div class="published-editor-count" data-editor-count></div></div></div><div class="published-edit-grid"><div class="published-edit-field"><label>Schedule date and time</label><input data-scheduled-date type="datetime-local" value="' + escapeHtml(scheduleValue) + '"></div><div class="published-edit-field"><label>Status</label><select data-scheduled-status><option selected>Scheduled</option><option>Draft</option></select></div></div><div class="published-edit-field"><label>Distribution channel</label><select><option' + (data.channel === 'LinkedIn' ? ' selected' : '') + '>LinkedIn</option><option' + (data.channel === 'Twitter' ? ' selected' : '') + '>Twitter</option><option' + (data.channel === 'Website' ? ' selected' : '') + '>Website</option></select></div></div><aside class="published-edit-sidebar"><div class="published-side-section"><label class="form-label">Cover Image <span class="published-optional">(optional)</span></label><label class="published-cover-upload"><input type="file" accept="image/*" data-social-cover><span><strong>▣</strong>Upload cover image</span></label><div class="published-cover-current" data-social-cover-name>' + escapeHtml(item.dataset.coverImageName || 'No cover image selected') + '</div><button class="published-side-button" type="button" data-social-cover-library>▣ Pick from library</button></div><div class="published-side-section"><label class="form-label">Media Gallery <span class="published-optional">(optional)</span></label><input type="file" accept="image/*,video/*" multiple hidden data-social-media-input><div class="published-media-actions"><button class="published-side-button" type="button" data-social-media-upload>↑ Upload</button><button class="published-side-button" type="button" data-social-media-library>▣ From library</button></div><div class="published-cover-current" data-social-media-name>' + escapeHtml(item.dataset.mediaNames || 'No additional media selected') + '</div></div></aside></section>';
     doc.querySelector('.main')?.appendChild(page);
     const close = () => {
       page.remove();
@@ -8609,7 +8665,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
       actionTypographyStyle.textContent = '.create-header-actions button,.new-press-actions button{font-family:inherit!important;font-size:12px!important;font-weight:700!important;line-height:1!important}';
       doc.head.appendChild(actionTypographyStyle);
       const activeSaveStyle = doc.createElement('style');
-      activeSaveStyle.textContent = '#createDraftButton.is-save-changes:not(:disabled),#createNewPress.is-save-changes:not(:disabled){border-color:#1e3b8a!important;background:#1e3b8a!important;color:#fff!important}#createDraftButton.is-save-changes:not(:disabled):hover,#createNewPress.is-save-changes:not(:disabled):hover{border-color:#294f9b!important;background:#294f9b!important;color:#fff!important}';
+      activeSaveStyle.textContent = '#createDraftButton.is-save-changes:not(:disabled),#createNewPress.is-save-changes:not(:disabled){border-color:#1e3b8a!important;background:#fff!important;color:#1e3b8a!important}#createDraftButton.is-save-changes:not(:disabled):hover,#createNewPress.is-save-changes:not(:disabled):hover{border-color:#1e3b8a!important;background:#eef2ff!important;color:#1e3b8a!important}#createDraftButton:disabled,#createNewPress:disabled,.content-review-schedule:disabled{border-color:#d0d0d0!important;background:#d9d9d9!important;color:#62666d!important;opacity:1!important}';
       doc.head.appendChild(activeSaveStyle);
 
       const config = kind === 'press' ? {
@@ -8648,7 +8704,8 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
       reviewButton.innerHTML = scheduleIcon + 'Review &amp; Schedule';
       actionBar?.appendChild(reviewButton);
       const scheduleLabel = scheduleDate.closest(kind === 'press' ? '.np-group' : '.form-group')?.querySelector('label');
-      const defaultScheduleLabel = scheduleLabel?.innerHTML || '';
+      const defaultScheduleLabel = 'Schedule date and time <span class="' + (kind === 'press' ? 'np-optional' : 'optional') + '">(optional)</span>';
+      if (scheduleLabel) scheduleLabel.innerHTML = defaultScheduleLabel;
       if (kind !== 'press') {
         statusLockNote.style.cssText = 'margin-top:6px;color:#667085;font-size:10px;line-height:1.4';
       }
@@ -8712,6 +8769,21 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
           return;
         }
         if (reviewing && reviewButton.disabled) return;
+        if (reviewing && reviewButton.dataset.reviewConfirmed !== 'true') {
+          const channel = selectByLabel(doc, kind === 'press' ? '.new-press-main .np-group' : '.article-form-main .form-group', /Distribution Channel/i)?.value || 'Website';
+          const timezone = kind === 'press' ? (selectByLabel(doc, '.new-press-main .np-group', /Timezone/i)?.value || 'Eastern Time (ET)') : 'Eastern Time (ET)';
+          showContentScheduleReview(doc, {
+            type: kind === 'press' ? 'Press Release' : 'Article',
+            title: titleInput.value.trim(),
+            content: editor?.innerText.trim(),
+            scheduleValue: scheduleDate.value,
+            destination: channel,
+            timezone,
+            onConfirm: () => { reviewButton.dataset.reviewConfirmed = 'true'; reviewButton.click(); }
+          });
+          return;
+        }
+        if (reviewing) delete reviewButton.dataset.reviewConfirmed;
         if (reviewing && !isEditing()) {
           const newTitle = titleInput.value.trim();
           const [date, time] = scheduleDate.value.split('T');
@@ -8933,7 +9005,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         .existing-file-remove{display:none!important}
         .asset-upload-selected{margin-top:10px;color:var(--success);font-size:10px;font-weight:600}
         .asset-replace-cancel{margin-top:10px;color:var(--text)}
-        #createAssetButton[data-editing="true"]{border-color:var(--navy)!important;background:var(--navy)!important;color:#fff!important}
+        #createAssetButton[data-editing="true"]{border-color:var(--navy)!important;background:var(--navy)!important;color:#fff!important}#createAssetButton[data-editing="true"]:hover{border-color:#3e579b!important;background:#3e579b!important;color:#fff!important}#createAssetButton[data-editing="true"] svg{fill:none!important;stroke:#fff!important;color:#fff!important}
         .asset-publishing-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
         .asset-publishing-grid .asset-field{margin:0}
         #assetScheduleHelp{display:none!important}
@@ -9362,7 +9434,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         .video-existing-actions{display:flex;gap:8px;flex:none;margin-left:auto}.video-current-file-replace,.video-replacement-cancel{height:36px;padding:0 13px;border:1px solid var(--input);border-radius:7px;background:#fff;color:var(--navy);font-size:10px;font-weight:700}.video-current-file-replace{border-color:var(--navy);background:var(--navy);color:#fff}.video-replacement-cancel{margin:12px 18px 0;color:var(--text)}#editFromView svg{fill:none!important;stroke:#fff!important;color:#fff!important}
         .inline-video-player{position:relative;height:270px;overflow:hidden;border-radius:10px;background:radial-gradient(circle at 65% 25%,#526b91 0,#263d65 35%,#102a5c 100%);color:#fff}.inline-video-player::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.08),transparent 70%);transform:translateX(-100%)}.inline-video-player.playing::before{animation:inlineVideoSweep 3s linear infinite}.inline-video-center{position:absolute;z-index:2;inset:0;display:grid;place-items:center;border:0;background:transparent;color:#fff;cursor:pointer}.inline-video-center span{width:62px;height:62px;display:grid;place-items:center;border-radius:50%;background:#fff;color:var(--navy);font-size:21px;box-shadow:0 8px 24px #10182855}.inline-video-controls{position:absolute;z-index:3;right:0;bottom:0;left:0;display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:10px;padding:16px 18px 12px;background:linear-gradient(transparent,rgba(7,16,35,.9))}.inline-video-control{width:28px;height:28px;border:0;background:transparent;color:#fff;font-size:15px;cursor:pointer}.inline-video-progress{height:4px;overflow:hidden;border-radius:999px;background:#ffffff59}.inline-video-progress-fill{width:0;height:100%;border-radius:inherit;background:#fff;transition:width .35s linear}.inline-video-time{font-size:10px;font-variant-numeric:tabular-nums}.inline-video-player.playing .inline-video-center{opacity:0}.inline-video-player.playing:hover .inline-video-center{opacity:.35}@keyframes inlineVideoSweep{to{transform:translateX(100%)}}
         #cancelComposer{height:42px!important;min-height:42px!important;max-height:42px!important}#saveDraft{border-color:#d0d5dd!important;background:#fff!important;color:#19181a!important;box-shadow:none!important}#saveDraft:hover{background:#f8fafc!important}#saveDraft svg{fill:none!important;stroke:currentColor!important}#saveDraft:disabled,#publishVideo:disabled{border-color:#e5e5e5!important;background:#e5e5e5!important;color:#6d6d6d!important;cursor:not-allowed}.published-confirm-backdrop{position:fixed;z-index:21000;inset:0;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(16,24,40,.45)}.published-confirm-modal{width:min(560px,100%);overflow:hidden;border-radius:16px;background:#fff;box-shadow:0 24px 70px rgba(16,24,40,.28)}.published-confirm-head{display:flex;align-items:flex-start;gap:14px;padding:24px;border-bottom:1px solid var(--line)}.published-confirm-icon{width:44px;height:44px;display:grid;place-items:center;flex:none;border-radius:10px;background:#fff4d6;color:#f59e0b;font-size:25px}.published-confirm-copy{flex:1}.published-confirm-copy h2{margin:0;color:#123665;font-size:20px}.published-confirm-copy p{margin:8px 0 0;color:var(--muted);font-size:12px;line-height:1.5}.published-confirm-close{width:32px;height:32px;border:0;border-radius:7px;background:transparent;color:var(--muted);font-size:24px}.published-confirm-actions{display:flex;justify-content:flex-end;gap:10px;padding:18px 24px}.published-confirm-actions button{height:40px;padding:0 18px;border:1px solid var(--input);border-radius:8px;background:#fff;color:var(--text);font-weight:700}.published-confirm-actions .confirm{border-color:#123665;background:#123665;color:#fff}
-        #saveDraft.primary:not(:disabled){border-color:var(--navy)!important;background:var(--navy)!important;color:#fff!important}#saveDraft.primary:not(:disabled):hover{border-color:var(--hover)!important;background:var(--hover)!important;color:#fff!important}
+        #saveDraft.cms-edit-save-outline:not(:disabled){border-color:var(--navy)!important;background:#fff!important;color:var(--navy)!important}#saveDraft.cms-edit-save-outline:not(:disabled):hover{border-color:var(--navy)!important;background:var(--tint)!important;color:var(--navy)!important}#saveDraft:disabled,#publishVideo:disabled{border-color:#d0d0d0!important;background:#d9d9d9!important;color:#62666d!important;opacity:1!important}
         .video-locked-note{margin-top:6px;color:var(--muted);font-size:9px}
         @media(max-width:620px){.video-edit-publishing-grid{grid-template-columns:1fr}}
       `;
@@ -9422,6 +9494,26 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         setTimeout(() => syncActiveVideoActions(), 0);
       };
 
+      const requestVideoScheduleReview = (publishButton, scheduleDate) => {
+        if (publishButton.dataset.reviewConfirmed === 'true') {
+          delete publishButton.dataset.reviewConfirmed;
+          return false;
+        }
+        const platforms = [...doc.querySelectorAll('.platform-option input:checked')].map(input => input.value);
+        showContentScheduleReview(doc, {
+          type: 'Video',
+          title: doc.getElementById('videoTitle')?.value.trim() || 'Video',
+          content: doc.getElementById('videoDescription')?.value.trim(),
+          scheduleValue: scheduleDate?.value,
+          destination: platforms.join(', ') || 'Video Library',
+          destinationCount: platforms.length || 1,
+          timezone: 'Eastern Time (ET)',
+          video: true,
+          onConfirm: () => { publishButton.dataset.reviewConfirmed = 'true'; publishButton.click(); }
+        });
+        return true;
+      };
+
       doc.addEventListener('click', event => {
         const publishButton = event.target.closest('#publishVideo');
         if (!publishButton || doc.documentElement.dataset.videoComposerMode !== 'new') return;
@@ -9430,6 +9522,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         const scheduleDate = doc.getElementById('scheduleDate');
         const scheduled = Boolean(scheduleDate?.value);
         if (!scheduled || publishButton.disabled) return;
+        if (requestVideoScheduleReview(publishButton, scheduleDate)) return;
         const statusSelect = doc.getElementById('videoEditStatus');
         if (statusSelect) statusSelect.value = 'Scheduled';
         const scheduledMode = doc.querySelector('input[name="publishMode"][value="scheduled"]');
@@ -9448,6 +9541,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
         event.stopImmediatePropagation();
         const scheduleDate = doc.getElementById('scheduleDate');
         if (!scheduleDate?.value || publishButton.disabled) return;
+        if (requestVideoScheduleReview(publishButton, scheduleDate)) return;
         const statusSelect = doc.getElementById('videoEditStatus');
         if (statusSelect) statusSelect.value = 'Scheduled';
         const scheduledMode = doc.querySelector('input[name="publishMode"][value="scheduled"]');
@@ -9491,7 +9585,7 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
           if (publishOptions) publishOptions.hidden = true;
           if (saveButton) {
             saveButton.hidden = false;
-            saveButton.classList.add('primary');
+            saveButton.classList.remove('primary');
             saveButton.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3h12l2 2v16H5z"></path><path d="M8 3v6h8V3M8 21v-7h8v7"></path></svg>Save Changes';
             saveButton.disabled = true;
           }
@@ -9873,12 +9967,13 @@ document.getElementById('editContentQuick').innerHTML='<svg aria-hidden="true" v
     const videoFrame = document.getElementById('frame-video');
     const socialFrame = document.getElementById('frame-social');
     const pollsFrame = document.getElementById('frame-polls');
+    const contentWorkspaceFrame = document.getElementById('frame-content-workspace');
     if (articleFrame) installNoBulkSelection(articleFrame);
     if (pressFrame) installNoBulkSelection(pressFrame);
     [articleFrame,pressFrame,ebookFrame].filter(Boolean).forEach(frame=>installContentHeaderStandard(frame,true));
     if (socialFrame) installContentHeaderStandard(socialFrame,false);
     if (pollsFrame) installPollFilterRow(pollsFrame);
-    [articleFrame,pressFrame,ebookFrame,videoFrame,socialFrame,pollsFrame].filter(Boolean).forEach(installContentActionStandard);
+    [articleFrame,pressFrame,ebookFrame,videoFrame,socialFrame,pollsFrame,templateFrame,contentWorkspaceFrame].filter(Boolean).forEach(installContentActionStandard);
     [articleFrame,pressFrame,ebookFrame,videoFrame,socialFrame,pollsFrame].filter(Boolean).forEach(installGlobalStatusPopup);
     if (ebookFrame) installEbookPublishedFileFlow(ebookFrame);
     if (articleFrame) installRequiredDescriptionFlow(articleFrame, '#articleEditor,.published-editor-area', '#createDraftButton,.published-edit-save', '#articleTitleInput,.published-edit-field input');
